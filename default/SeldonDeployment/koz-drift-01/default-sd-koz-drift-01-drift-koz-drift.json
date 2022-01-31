@@ -43,7 +43,7 @@
                             "--protocol",
                             "seldon.http",
                             "--storage_uri",
-                            "gs://tom-seldon-examples/text-drift/koz/",
+                            "gs://tom-seldon-examples/text-drift/koz/my_path/",
                             "--reply_url",
                             "http://seldon-request-logger.seldon-logs",
                             "--event_type",
