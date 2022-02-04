@@ -28,7 +28,7 @@
                 "componentSpecs": [
                     {
                         "metadata": {
-                            "creationTimestamp": "2022-01-31T19:25:41Z"
+                            "creationTimestamp": "2022-02-04T21:27:57Z"
                         },
                         "spec": {
                             "containers": [
@@ -52,15 +52,7 @@
                 "replicas": 1,
                 "engineResources": {},
                 "svcOrchSpec": {},
-                "traffic": 100,
-                "explainer": {
-                    "type": "AnchorTabular",
-                    "modelUri": "gs://tom-seldon-examples/retail-workshop/models/tom-farrand/lr",
-                    "containerSpec": {
-                        "name": "",
-                        "resources": {}
-                    }
-                }
+                "traffic": 100
             }
         ],
         "annotations": {
