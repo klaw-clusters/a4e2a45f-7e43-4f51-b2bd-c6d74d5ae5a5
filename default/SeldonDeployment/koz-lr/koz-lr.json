@@ -1,6 +1,6 @@
 {
     "kind": "SeldonDeployment",
-    "apiVersion": "machinelearning.seldon.io/v1",
+    "apiVersion": "machinelearning.seldon.io/v1alpha2",
     "metadata": {
         "name": "koz-lr",
         "namespace": "default",
@@ -28,7 +28,7 @@
                 "componentSpecs": [
                     {
                         "metadata": {
-                            "creationTimestamp": "2022-02-07T22:49:34Z"
+                            "creationTimestamp": "2022-02-07T22:54:57Z"
                         },
                         "spec": {
                             "containers": [
@@ -52,41 +52,15 @@
                 "replicas": 1,
                 "engineResources": {},
                 "svcOrchSpec": {},
-                "traffic": 100
-            },
-            {
-                "name": "shadow",
-                "graph": {
-                    "name": "koz-lr-container",
-                    "implementation": "SKLEARN_SERVER",
-                    "modelUri": "gs://tom-seldon-examples/retail-workshop/models/koz/gb/model.joblib",
-                    "logger": {
-                        "mode": "all"
+                "traffic": 100,
+                "explainer": {
+                    "type": "AnchorTabular",
+                    "modelUri": "gs://tom-seldon-examples/retail-workshop/models/tom-farrand/lr",
+                    "containerSpec": {
+                        "name": "",
+                        "resources": {}
                     }
-                },
-                "componentSpecs": [
-                    {
-                        "metadata": {
-                            "creationTimestamp": "2022-02-07T22:50:52Z"
-                        },
-                        "spec": {
-                            "containers": [
-                                {
-                                    "name": "koz-lr-container",
-                                    "resources": {}
-                                }
-                            ]
-                        }
-                    }
-                ],
-                "replicas": 1,
-                "annotations": {
-                    "project.seldon.io/koz-lr-container": "default",
-                    "seldon.io/canary": "false"
-                },
-                "engineResources": {},
-                "svcOrchSpec": {},
-                "shadow": true
+                }
             }
         ],
         "annotations": {
