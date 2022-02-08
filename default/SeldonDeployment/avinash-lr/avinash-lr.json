@@ -6,7 +6,6 @@
         "namespace": "default",
         "creationTimestamp": null,
         "labels": {
-            "app.kubernetes.io/instance": "a4e2a45f-7e43-4f51-b2bd-c6d74d5ae5a5-default",
             "fluentd": "true"
         }
     },
@@ -53,7 +52,7 @@
                 "replicas": 1,
                 "engineResources": {},
                 "svcOrchSpec": {},
-                "traffic": 100,
+                "traffic": 90,
                 "explainer": {
                     "type": "AnchorTabular",
                     "modelUri": "gs://tom-seldon-examples/retail-workshop/models/tom-farrand/lr",
@@ -62,6 +61,51 @@
                         "resources": {}
                     }
                 }
+            },
+            {
+                "name": "canary",
+                "graph": {
+                    "name": "avinash-lr-container",
+                    "implementation": "SKLEARN_SERVER",
+                    "modelUri": "gs://tom-seldon-examples/retail-workshop/models/avinash/gb/model.joblib",
+                    "logger": {
+                        "mode": "all"
+                    }
+                },
+                "componentSpecs": [
+                    {
+                        "metadata": {
+                            "creationTimestamp": "2022-02-08T14:14:58Z"
+                        },
+                        "spec": {
+                            "containers": [
+                                {
+                                    "name": "avinash-lr-container",
+                                    "resources": {
+                                        "limits": {
+                                            "cpu": "1",
+                                            "memory": "1Gi",
+                                            "nvidia.com/gpu": "0"
+                                        },
+                                        "requests": {
+                                            "cpu": "100m",
+                                            "memory": "1Gi",
+                                            "nvidia.com/gpu": "0"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "replicas": 1,
+                "annotations": {
+                    "project.seldon.io/avinash-lr-container": "default",
+                    "seldon.io/canary": "true"
+                },
+                "engineResources": {},
+                "svcOrchSpec": {},
+                "traffic": 10
             }
         ],
         "annotations": {
