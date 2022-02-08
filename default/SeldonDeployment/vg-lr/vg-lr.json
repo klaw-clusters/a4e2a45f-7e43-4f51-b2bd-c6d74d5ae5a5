@@ -1,6 +1,6 @@
 {
     "kind": "SeldonDeployment",
-    "apiVersion": "machinelearning.seldon.io/v1",
+    "apiVersion": "machinelearning.seldon.io/v1alpha2",
     "metadata": {
         "name": "vg-lr",
         "namespace": "default",
@@ -28,7 +28,7 @@
                 "componentSpecs": [
                     {
                         "metadata": {
-                            "creationTimestamp": "2022-02-08T13:32:15Z"
+                            "creationTimestamp": "2022-02-08T14:08:23Z"
                         },
                         "spec": {
                             "containers": [
@@ -52,52 +52,15 @@
                 "replicas": 1,
                 "engineResources": {},
                 "svcOrchSpec": {},
-                "traffic": 90
-            },
-            {
-                "name": "canary",
-                "graph": {
-                    "name": "vg-lr-container",
-                    "implementation": "SKLEARN_SERVER",
-                    "modelUri": "gs://tom-seldon-examples/retail-workshop/models/vg/gb",
-                    "logger": {
-                        "mode": "all"
+                "traffic": 100,
+                "explainer": {
+                    "type": "AnchorTabular",
+                    "modelUri": "gs://tom-seldon-examples/retail-workshop/models/tom-farrand/lr",
+                    "containerSpec": {
+                        "name": "",
+                        "resources": {}
                     }
-                },
-                "componentSpecs": [
-                    {
-                        "metadata": {
-                            "creationTimestamp": "2022-02-08T14:01:03Z"
-                        },
-                        "spec": {
-                            "containers": [
-                                {
-                                    "name": "vg-lr-container",
-                                    "resources": {
-                                        "limits": {
-                                            "cpu": "1",
-                                            "memory": "1Gi",
-                                            "nvidia.com/gpu": "0"
-                                        },
-                                        "requests": {
-                                            "cpu": "100m",
-                                            "memory": "1Gi",
-                                            "nvidia.com/gpu": "0"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    }
-                ],
-                "replicas": 1,
-                "annotations": {
-                    "project.seldon.io/vg-lr-container": "default",
-                    "seldon.io/canary": "true"
-                },
-                "engineResources": {},
-                "svcOrchSpec": {},
-                "traffic": 10
+                }
             }
         ],
         "annotations": {
