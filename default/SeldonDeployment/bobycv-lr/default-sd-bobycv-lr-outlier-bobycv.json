@@ -34,7 +34,7 @@
                             "--http_port",
                             "8080",
                             "--protocol",
-                            "tensorflow.http",
+                            "seldon.http",
                             "--storage_uri",
                             "gs://tom-seldon-examples/retail-workshop/models/bobycv/outlier_detector/",
                             "--reply_url",
