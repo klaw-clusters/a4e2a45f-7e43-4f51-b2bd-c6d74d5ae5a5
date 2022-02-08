@@ -1,6 +1,6 @@
 {
     "kind": "SeldonDeployment",
-    "apiVersion": "machinelearning.seldon.io/v1",
+    "apiVersion": "machinelearning.seldon.io/v1alpha2",
     "metadata": {
         "name": "mary-lr",
         "namespace": "default",
@@ -28,7 +28,7 @@
                 "componentSpecs": [
                     {
                         "metadata": {
-                            "creationTimestamp": "2022-02-08T13:32:54Z"
+                            "creationTimestamp": "2022-02-08T14:08:19Z"
                         },
                         "spec": {
                             "containers": [
@@ -52,41 +52,15 @@
                 "replicas": 1,
                 "engineResources": {},
                 "svcOrchSpec": {},
-                "traffic": 50
-            },
-            {
-                "name": "canary",
-                "graph": {
-                    "name": "mary-lr-container",
-                    "implementation": "SKLEARN_SERVER",
-                    "modelUri": "gs://tom-seldon-examples/retail-workshop/models/mary/gb/",
-                    "logger": {
-                        "mode": "all"
+                "traffic": 100,
+                "explainer": {
+                    "type": "AnchorTabular",
+                    "modelUri": "gs://tom-seldon-examples/retail-workshop/models/tom-farrand/lr",
+                    "containerSpec": {
+                        "name": "",
+                        "resources": {}
                     }
-                },
-                "componentSpecs": [
-                    {
-                        "metadata": {
-                            "creationTimestamp": "2022-02-08T13:45:14Z"
-                        },
-                        "spec": {
-                            "containers": [
-                                {
-                                    "name": "mary-lr-container",
-                                    "resources": {}
-                                }
-                            ]
-                        }
-                    }
-                ],
-                "replicas": 1,
-                "annotations": {
-                    "project.seldon.io/mary-lr-container": "default",
-                    "seldon.io/canary": "true"
-                },
-                "engineResources": {},
-                "svcOrchSpec": {},
-                "traffic": 50
+                }
             }
         ],
         "annotations": {
