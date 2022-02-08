@@ -6,7 +6,6 @@
         "namespace": "default",
         "creationTimestamp": null,
         "labels": {
-            "app.kubernetes.io/instance": "a4e2a45f-7e43-4f51-b2bd-c6d74d5ae5a5-default",
             "fluentd": "true"
         }
     },
@@ -53,7 +52,41 @@
                 "replicas": 1,
                 "engineResources": {},
                 "svcOrchSpec": {},
-                "traffic": 100
+                "traffic": 90
+            },
+            {
+                "name": "canary",
+                "graph": {
+                    "name": "koz-lr-container",
+                    "implementation": "SKLEARN_SERVER",
+                    "modelUri": "gs://tom-seldon-examples/retail-workshop/models/koz/gb",
+                    "logger": {
+                        "mode": "all"
+                    }
+                },
+                "componentSpecs": [
+                    {
+                        "metadata": {
+                            "creationTimestamp": "2022-02-08T14:22:02Z"
+                        },
+                        "spec": {
+                            "containers": [
+                                {
+                                    "name": "koz-lr-container",
+                                    "resources": {}
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "replicas": 1,
+                "annotations": {
+                    "project.seldon.io/koz-lr-container": "default",
+                    "seldon.io/canary": "true"
+                },
+                "engineResources": {},
+                "svcOrchSpec": {},
+                "traffic": 10
             }
         ],
         "annotations": {
