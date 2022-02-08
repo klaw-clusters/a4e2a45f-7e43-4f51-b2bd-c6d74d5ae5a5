@@ -1,6 +1,6 @@
 {
     "kind": "SeldonDeployment",
-    "apiVersion": "machinelearning.seldon.io/v1",
+    "apiVersion": "machinelearning.seldon.io/v1alpha2",
     "metadata": {
         "name": "tt-lr",
         "namespace": "default",
@@ -28,7 +28,7 @@
                 "componentSpecs": [
                     {
                         "metadata": {
-                            "creationTimestamp": "2022-02-08T13:47:03Z"
+                            "creationTimestamp": "2022-02-08T14:09:00Z"
                         },
                         "spec": {
                             "containers": [
@@ -52,41 +52,15 @@
                 "replicas": 1,
                 "engineResources": {},
                 "svcOrchSpec": {},
-                "traffic": 90
-            },
-            {
-                "name": "canary",
-                "graph": {
-                    "name": "tt-lr-container",
-                    "implementation": "SKLEARN_SERVER",
-                    "modelUri": "gs://tom-seldon-examples/retail-workshop/models/tt/gb",
-                    "logger": {
-                        "mode": "all"
+                "traffic": 100,
+                "explainer": {
+                    "type": "AnchorTabular",
+                    "modelUri": "gs://tom-seldon-examples/retail-workshop/models/tom-farrand/lr",
+                    "containerSpec": {
+                        "name": "",
+                        "resources": {}
                     }
-                },
-                "componentSpecs": [
-                    {
-                        "metadata": {
-                            "creationTimestamp": "2022-02-08T13:56:12Z"
-                        },
-                        "spec": {
-                            "containers": [
-                                {
-                                    "name": "tt-lr-container",
-                                    "resources": {}
-                                }
-                            ]
-                        }
-                    }
-                ],
-                "replicas": 1,
-                "annotations": {
-                    "project.seldon.io/tt-lr-container": "model.joblib",
-                    "seldon.io/canary": "true"
-                },
-                "engineResources": {},
-                "svcOrchSpec": {},
-                "traffic": 10
+                }
             }
         ],
         "annotations": {
