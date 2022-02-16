@@ -1,6 +1,6 @@
 {
     "kind": "SeldonDeployment",
-    "apiVersion": "machinelearning.seldon.io/v1alpha2",
+    "apiVersion": "machinelearning.seldon.io/v1",
     "metadata": {
         "name": "koz-lr",
         "namespace": "default",
@@ -52,7 +52,7 @@
                 "replicas": 1,
                 "engineResources": {},
                 "svcOrchSpec": {},
-                "traffic": 100,
+                "traffic": 50,
                 "explainer": {
                     "type": "AnchorTabular",
                     "modelUri": "gs://tom-seldon-examples/retail-workshop/models/tom-farrand/lr",
@@ -61,6 +61,40 @@
                         "resources": {}
                     }
                 }
+            },
+            {
+                "name": "canary",
+                "graph": {
+                    "name": "koz-lr-container",
+                    "implementation": "SKLEARN_SERVER",
+                    "modelUri": "gs://tom-seldon-examples/retail-workshop/models/koz/gb",
+                    "logger": {
+                        "mode": "all"
+                    }
+                },
+                "componentSpecs": [
+                    {
+                        "metadata": {
+                            "creationTimestamp": "2022-02-16T23:20:28Z"
+                        },
+                        "spec": {
+                            "containers": [
+                                {
+                                    "name": "koz-lr-container",
+                                    "resources": {}
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "replicas": 1,
+                "annotations": {
+                    "project.seldon.io/koz-lr-container": "default",
+                    "seldon.io/canary": "true"
+                },
+                "engineResources": {},
+                "svcOrchSpec": {},
+                "traffic": 50
             }
         ],
         "annotations": {
