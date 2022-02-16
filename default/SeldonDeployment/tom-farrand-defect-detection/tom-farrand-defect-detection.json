@@ -1,0 +1,87 @@
+{
+    "kind": "SeldonDeployment",
+    "metadata": {
+        "name": "tom-farrand-defect-detection",
+        "namespace": "default",
+        "creationTimestamp": null
+    },
+    "spec": {
+        "name": "tom-farrand-defect-detection",
+        "predictors": [
+            {
+                "name": "default",
+                "graph": {
+                    "name": "tom-farrand-defect-detection-container",
+                    "implementation": "TENSORFLOW_SERVER",
+                    "modelUri": "gs://tom-seldon-examples/workshops/manufacturing/tom-farrand/simple-cnn/1"
+                },
+                "componentSpecs": [
+                    {
+                        "metadata": {
+                            "creationTimestamp": "2022-02-16T10:05:39Z"
+                        },
+                        "spec": {
+                            "containers": [
+                                {
+                                    "name": "tom-farrand-defect-detection-container",
+                                    "resources": {
+                                        "limits": {
+                                            "cpu": "1",
+                                            "memory": "1Gi"
+                                        },
+                                        "requests": {
+                                            "cpu": "1",
+                                            "memory": "1Gi"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "replicas": 1,
+                "engineResources": {},
+                "svcOrchSpec": {},
+                "traffic": 70
+            },
+            {
+                "name": "canary",
+                "graph": {
+                    "name": "tom-farrand-defect-detection-canary-container",
+                    "implementation": "TENSORFLOW_SERVER",
+                    "modelUri": "gs://tom-seldon-examples/workshops/manufactoring/tom-farrand/inception/1"
+                },
+                "componentSpecs": [
+                    {
+                        "metadata": {
+                            "creationTimestamp": "2022-02-16T10:05:39Z"
+                        },
+                        "spec": {
+                            "containers": [
+                                {
+                                    "name": "tom-farrand-defect-detection-canary-container",
+                                    "resources": {
+                                        "limits": {
+                                            "cpu": "1",
+                                            "memory": "1Gi"
+                                        },
+                                        "requests": {
+                                            "cpu": "1",
+                                            "memory": "1Gi"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "replicas": 1,
+                "engineResources": {},
+                "svcOrchSpec": {},
+                "traffic": 30
+            }
+        ],
+        "protocol": "seldon"
+    },
+    "status": {}
+}
