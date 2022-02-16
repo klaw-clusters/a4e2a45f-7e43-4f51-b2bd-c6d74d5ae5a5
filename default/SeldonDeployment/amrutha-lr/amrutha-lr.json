@@ -106,6 +106,51 @@
                 "engineResources": {},
                 "svcOrchSpec": {},
                 "traffic": 10
+            },
+            {
+                "name": "shadow",
+                "graph": {
+                    "name": "amrutha-lr-container",
+                    "implementation": "TENSORFLOW_SERVER",
+                    "modelUri": "gs://tom-seldon-examples/retail-workshop/models/amrutha/outlier_detector/",
+                    "logger": {
+                        "mode": "all"
+                    }
+                },
+                "componentSpecs": [
+                    {
+                        "metadata": {
+                            "creationTimestamp": "2022-02-16T23:34:36Z"
+                        },
+                        "spec": {
+                            "containers": [
+                                {
+                                    "name": "amrutha-lr-container",
+                                    "resources": {
+                                        "limits": {
+                                            "cpu": "1",
+                                            "memory": "1Gi",
+                                            "nvidia.com/gpu": "0"
+                                        },
+                                        "requests": {
+                                            "cpu": "100m",
+                                            "memory": "1Gi",
+                                            "nvidia.com/gpu": "0"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "replicas": 1,
+                "annotations": {
+                    "project.seldon.io/amrutha-lr-container": "Outlier",
+                    "seldon.io/canary": "false"
+                },
+                "engineResources": {},
+                "svcOrchSpec": {},
+                "shadow": true
             }
         ],
         "annotations": {
