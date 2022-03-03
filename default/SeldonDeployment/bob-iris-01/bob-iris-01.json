@@ -44,6 +44,40 @@
                 "engineResources": {},
                 "svcOrchSpec": {},
                 "traffic": 100
+            },
+            {
+                "name": "shadow",
+                "graph": {
+                    "name": "bob-iris-01-container",
+                    "implementation": "SKLEARN_SERVER",
+                    "modelUri": "gs://seldon-models/v1.13.0-dev/sklearn/iris",
+                    "logger": {
+                        "mode": "all"
+                    }
+                },
+                "componentSpecs": [
+                    {
+                        "metadata": {
+                            "creationTimestamp": "2022-03-03T20:47:22Z"
+                        },
+                        "spec": {
+                            "containers": [
+                                {
+                                    "name": "bob-iris-01-container",
+                                    "resources": {}
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "replicas": 1,
+                "annotations": {
+                    "project.seldon.io/bob-iris-01-container": "default",
+                    "seldon.io/canary": "false"
+                },
+                "engineResources": {},
+                "svcOrchSpec": {},
+                "shadow": true
             }
         ],
         "annotations": {
