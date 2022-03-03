@@ -6,6 +6,7 @@
         "namespace": "default",
         "creationTimestamp": null,
         "labels": {
+            "app.kubernetes.io/instance": "a4e2a45f-7e43-4f51-b2bd-c6d74d5ae5a5-default",
             "fluentd": "true"
         }
     },
@@ -43,7 +44,15 @@
                 },
                 "engineResources": {},
                 "svcOrchSpec": {},
-                "traffic": 100
+                "traffic": 100,
+                "explainer": {
+                    "type": "AnchorTabular",
+                    "modelUri": "gs://seldon-models/alibi/iris_anchor_tabular_explainer_v2",
+                    "containerSpec": {
+                        "name": "",
+                        "resources": {}
+                    }
+                }
             },
             {
                 "name": "shadow",
