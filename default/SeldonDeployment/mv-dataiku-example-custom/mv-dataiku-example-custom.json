@@ -1,0 +1,73 @@
+{
+    "kind": "SeldonDeployment",
+    "apiVersion": "machinelearning.seldon.io/v1",
+    "metadata": {
+        "name": "mv-dataiku-example-custom",
+        "namespace": "default",
+        "creationTimestamp": null,
+        "labels": {
+            "fluentd": "true"
+        }
+    },
+    "spec": {
+        "name": "mv-dataiku-example-custom",
+        "predictors": [
+            {
+                "name": "default",
+                "graph": {
+                    "name": "mv-dataiku-example-custom-container",
+                    "type": "MODEL",
+                    "parameters": [
+                        {
+                            "name": "model_path",
+                            "value": "katacoda-scenarios/dataiku-model/high-revenue-prediction.pmml",
+                            "type": "STRING"
+                        }
+                    ],
+                    "logger": {
+                        "mode": "all"
+                    }
+                },
+                "componentSpecs": [
+                    {
+                        "metadata": {
+                            "creationTimestamp": "2022-03-08T12:29:40Z"
+                        },
+                        "spec": {
+                            "containers": [
+                                {
+                                    "name": "mv-dataiku-example-custom-container",
+                                    "image": "seldonexamples/mv-dataiku-example:0.1",
+                                    "resources": {
+                                        "limits": {
+                                            "cpu": "1",
+                                            "memory": "1Gi",
+                                            "nvidia.com/gpu": "0"
+                                        },
+                                        "requests": {
+                                            "cpu": "100m",
+                                            "memory": "1Gi",
+                                            "nvidia.com/gpu": "0"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "replicas": 1,
+                "annotations": {
+                    "project.seldon.io/mv-dataiku-example-custom-container": "default"
+                },
+                "engineResources": {},
+                "svcOrchSpec": {},
+                "traffic": 100
+            }
+        ],
+        "annotations": {
+            "seldon.io/engine-seldon-log-messages-externally": "true"
+        },
+        "protocol": "seldon"
+    },
+    "status": {}
+}
